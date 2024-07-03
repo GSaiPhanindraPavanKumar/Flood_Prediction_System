@@ -1,0 +1,47 @@
+import cv2
+import numpy as np
+from datetime import datetime, time
+
+# Load your trained model for sign language alphabet prediction
+# Replace 'load_model' with the function you use to load your trained model
+# model = load_model('path/to/your/trained/model')
+
+# Example function to predict sign language alphabet
+def predict_sign_language_alphabet(frame):
+    # Preprocess frame (if necessary)
+    # Perform prediction using your trained model
+    # Return the predicted alphabet
+    
+    # For demonstration, let's assume it returns a random alphabet
+    alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+                 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    return np.random.choice(alphabets)
+
+# Function to check if current time is within allowed range
+def is_within_time_range():
+    now = datetime.now()
+    current_time = now.time()
+    return current_time >= time(18, 0) and current_time <= time(22, 0)
+
+# Open webcam
+cap = cv2.VideoCapture(0)
+
+while True:
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+
+    # Display the resulting frame
+    cv2.imshow('Frame', frame)
+
+    if is_within_time_range():
+        # Perform sign language alphabet recognition
+        predicted_alphabet = predict_sign_language_alphabet(frame)
+        print("Predicted sign language alphabet:", predicted_alphabet)
+
+    # Break the loop if 'q' is pressed
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Release the capture
+cap.release()
+cv2.destroyAllWindows()
