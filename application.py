@@ -1,5 +1,6 @@
 import flask
 from flask import render_template, request
+import os
 
 import pickle
 from training import prediction
