@@ -1,5 +1,6 @@
 import flask
 from flask import render_template, request
+import os
 
 import pickle
 from training import prediction
@@ -49,5 +50,6 @@ def get_predicts():
         return render_template('predicts.html', cityname="Oops, we weren't able to retrieve data for that city.")
 
 
-if __name__ == "__main__":
-    application.run(debug=True)
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    application.run(host='0.0.0.0', port=port, debug=True)
